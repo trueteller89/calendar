@@ -1,0 +1,85 @@
+<!doctype html>
+<html  lang="en" ng-app="calendarApp">
+  <head>
+ <!-- <script src="https://code.jquery.com/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+ <!--<script src="http://code.angularjs.org/1.1.4/angular.min.js"></script>-->
+  
+  <script src="js/libs/angular.js"></script>
+  <script src="js/controllers.js"></script>
+  <!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+  <title>calendar</title>
+  </head>
+  <body>
+  	<h4>Calendar for month</h4>
+    <div ng-controller="setCalendar">
+      <div class="monthSelect">
+    	<select ng-model="month" ng-options="month for month in monthes">
+    		<option value=""></option>
+    	</select>
+          </div>
+        
+    <table class="calendar">
+    <tr ng-repeat="row in board track by $index">
+          <td ng-repeat="col in row track by $index"  ng-click="editDay(setDay($parent.$index, $index))" class="cell" 
+          ng-style="{'background-color':MarkBusy(setDay($parent.$index, $index))}"
+         >
+         {{setDay($parent.$index, $index)}}
+          </td>
+        </tr>
+    </table>
+   
+  </div>
+   <h4>Shedule for</h4>
+ <div ng-controller="SampleCtrl">
+   <h4>{{selectedDay}}</h4>
+   <p ng-repeat="ev in events track by $index" ng-style="{'color':'{{ev[0].priority}}'}">
+    {{ev[0].time}} - {{ev[0].title}}
+  <!--<span class="label label-default" ng-click="events.$remove(ev.parent().parent())">Remove event</span>-->
+  <span class="label label-default" ng-click="removeFromDatabase(ev)">Remove event</span>
+        </p>   
+
+ </div>
+     <div ng-controller="DayDetailCtrl">
+
+    <div class="row">
+        <div class="col-md-3">
+                   <p class="input-group">
+               <label>time:</label>
+              <input type="text" class="form-control" value="" ng-model="event.time1"/>
+                         </p>
+        </div>
+
+        <div class="col-md-3">
+            <p class="input-group">
+              <label>title:</label>
+              <input type="text" class="form-control" value=""  ng-model="event.title1"/>
+                      </p>
+        </div>
+          <div class="col-md-3">
+            <p class="input-group">
+              <label>priority:</label>
+              <input type="text" class="form-control" value=""  ng-model="event.priority1"/>
+              <div class="prioritybuttons">
+       <span class="label label-danger" ng-click="setPriority('red')">High</span>
+<span class="label label-primary" ng-click="setPriority('blue')">Middle</span>
+<span class="label label-success" ng-click="setPriority('green')">Low</span>
+
+            </div>
+            </p>
+                    </div>
+    <div class="col-md-3">
+      <button type="button" class="btn btn-default" id="saveEvent" ng-click="saveDayDetails(selectedDay, event.title1, event.time1, event.priority1)">Save event</button>
+   <!-- <span class="label label-default" ng-click="saveDayDetails(selectedDay, event.title1, event.time1, event.priority1)">Save event</span>-->
+  </div>
+    </div>
+       </div>
+  
+  </body>
+</html>

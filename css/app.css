@@ -1,0 +1,33 @@
+  body {
+padding: 20px 20px 20px 20px;
+  }
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+.row {
+display: block-inline;
+background-color:#CCCCCC;
+}
+.cell{
+ height:50px;
+    width: 50px;
+    border: 1px solid black;
+    text-align:center;
+    vertical-align:middle;
+    cursor:pointer';
+}
+
+.monthSelect{
+  background-color:#CCCCCC;
+}
+#saveEvent {
+margin-top:25px;
+
+}
